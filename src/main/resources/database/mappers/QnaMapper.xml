@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.winter.app.board.qna.QnaDAO">
+  	
+  	
+  	
+  	
+  	<select id="getDetail" parameterType="BoardVO" resultMap="getDetailResult">
+  	SELECT *
+  	FROM QNA N 
+  		LEFT JOIN QNAFILES NF
+  		USING(NOTICENUM)
+  		WHERE NOTICENUM=#{noticeNum} 
+  	</select>
+  	<resultMap type="QnaVO" id="getDetailResult">
+  	<id column="NOTICENUM" property="noticeNum"/>
+  	<result column="NOTICEWRITER" property="noticeWriter"/>
+  	<result column="NOTICEHEAD" property="noticeHead"/>
+  	<result column="NOTICECONTENTS" property="noticeContents"/>
+  	<result column="NOTICEDATE" property="noticeDate"/>
+  	<result column="NOTICEVIEWS" property="noticeViews"/>
+  	<collection property="fileVOs" javaType="List" ofType="FileVO">
+  	<id column="FILENUM" property="fileNum"/>
+ 	<result column="FILENAME" property="fileName"/>
+  	<result column="ORINAME" property="oriName"/>
+  	</collection>
+  	
+  	</resultMap>
+  	
+  	
+  	
+  	
+  	
+  	
+  	<insert id="addFile" parameterType="FileVO">
+  	INSERT INTO QNAFILES 
+  	VALUES(NULL,#{noticeNum},#{fileName},#{oriName})
+  	</insert>
+  	
+  	
+  	
+  	<select id="getTotalCount" resultType="Long" parameterType="Pager">
+  		SELECT COUNT(NOTICENUM) FROM QNA
+  		<include refid="search"></include> 
+  	</select>
+  	
+  	<sql id="search" >
+  	<where>
+  	<choose>
+  	<when test="kind=='kind1'">NOTICEHEAD</when>
+  	<when test="kind=='kind2'">NOTICECONTENTS</when>
+  	<otherwise>NOTICEWRITER</otherwise>
+  	</choose>
+		LIKE CONCAT('%',#{search},'%')
+  	</where>
+  	</sql>
+  	
+  	<select id="getList"  resultType="BoardVO" parameterType="Pager">
+  		SELECT * FROM QNA 
+  		<include refid="search"></include> 
+  		ORDER BY NOTICENUM DESC
+  		LIMIT #{startIndex},#{perPage}
+  	</select>
+  
+  	<insert id="add" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="noticeNum">
+  		INSERT INTO QNA (NOTICENUM,NOTICEWRITER,NOTICEHEAD,NOTICECONTENTS,NOTICEDATE,NOTICEVIEWS)
+  		 VALUES(NULL,#{noticeWriter},#{noticeHead},#{noticeContents},now(),0)
+  	</insert>
+  
+	  
+  
+  </mapper>
