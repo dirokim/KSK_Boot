@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.winter.app.board.BoardVO;
 import com.winter.app.util.Pager;
@@ -43,9 +44,17 @@ public class NoticeController {
 		return "board/add";
 	}
 	@PostMapping("add")
-	public String add(NoticeVO noticeVo,Model model)throws Exception {
-		int result = noticeService.add(noticeVo);
-		return "redirect:board/list";
+	public String add(NoticeVO noticeVo,Model model,MultipartFile [] attach)throws Exception {
+		
+		int result = noticeService.add(noticeVo,attach);
+		return "redirect:./list";
+	}
+	
+	@GetMapping("detail")
+	public String getDetail(BoardVO boardVO,Model model) throws Exception {
+		boardVO = noticeService.getDetail(boardVO);
+		model.addAttribute("vo",boardVO);
+		return "board/detail";
 	}
 	
 	

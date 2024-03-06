@@ -5,6 +5,42 @@
   <mapper namespace="com.winter.app.board.notice.NoticeDAO">
   	
   	
+  	
+  	
+  	<select id="getDetail" parameterType="BoardVO" resultMap="getDetailResult">
+  	SELECT *
+  	FROM NOTICE N 
+  		LEFT JOIN NOTICEFILES NF
+  		USING(NOTICENUM)
+  		WHERE NOTICENUM=#{noticeNum} 
+  	</select>
+  	<resultMap type="NoticeVO" id="getDetailResult">
+  	<id column="NOTICENUM" property="noticeNum"/>
+  	<result column="NOTICEWRITER" property="noticeWriter"/>
+  	<result column="NOTICEHEAD" property="noticeHead"/>
+  	<result column="NOTICECONTENTS" property="noticeContents"/>
+  	<result column="NOTICEDATE" property="noticeDate"/>
+  	<result column="NOTICEVIEWS" property="noticeViews"/>
+  	<collection property="fileVOs" javaType="List" ofType="FileVO">
+  	<id column="FILENUM" property="fileNum"/>
+ 	<result column="FILENAME" property="fileName"/>
+  	<result column="ORINAME" property="oriName"/>
+  	</collection>
+  	
+  	</resultMap>
+  	
+  	
+  	
+  	
+  	
+  	
+  	<insert id="addFile" parameterType="FileVO">
+  	INSERT INTO NOTICEFILES 
+  	VALUES(NULL,#{noticeNum},#{fileName},#{oriName})
+  	</insert>
+  	
+  	
+  	
   	<select id="getTotalCount" resultType="Long" parameterType="Pager">
   		SELECT COUNT(NOTICENUM) FROM NOTICE 
   		<include refid="search"></include> 
@@ -28,9 +64,9 @@
   		LIMIT #{startIndex},#{perPage}
   	</select>
   
-  	<insert id="add" parameterType="NoticeVO">
-  		INSERT INTO NOTICE (NOTICEWRITER,NOTICEHEAD,NOTICECONTENTS,NOTICEDATE,NOTICEVIEWS)
-  		 VALUES(#{noticeWriter},#{noticeHead},#{noticeContents},now(),0)
+  	<insert id="add" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="noticeNum">
+  		INSERT INTO NOTICE (NOTICENUM,NOTICEWRITER,NOTICEHEAD,NOTICECONTENTS,NOTICEDATE,NOTICEVIEWS)
+  		 VALUES(NULL,#{noticeWriter},#{noticeHead},#{noticeContents},now(),0)
   	</insert>
   
 	  

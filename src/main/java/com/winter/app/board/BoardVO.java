@@ -1,6 +1,7 @@
 package com.winter.app.board;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +22,8 @@ public class BoardVO {
 	private String noticeContents;
 	private Date noticeDate;
 	private Long noticeViews;
-	
+
+	private List<FileVO> fileVOs;
 	
 	
 	

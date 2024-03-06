@@ -45,7 +45,7 @@
 
                     <!-- Content Row -->
                     <div class="row">
-                        <form action="" method="post">
+                        <form action="" method="post" enctype="multipart/form-data">
                             
                             <div class="mb-3">
                                 <label for="title" class="form-label">제목</label>
@@ -61,6 +61,13 @@
                                 <label for="contents" class="form-label" >내용</label>
                                 <textarea class="form-control" id="contents" rows="3" name="noticeContents"></textarea>
                             </div>
+
+                            <div class="mb-3">
+                                <input type="file" name="attach">
+                                <input type="file" name="attach">
+                                <input type="file" name="attach">
+                            </div>
+
                             <div class="mb-3">
                                 <button class="btn btn-primary">작성</button>
                             </div>
