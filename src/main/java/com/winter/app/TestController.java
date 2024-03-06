@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class TestController {
 	
-	@GetMapping("/")
+	@GetMapping("")
 	public String test () {
 		//trace , debug, info ,warn ,error
 		log.error("error message");
