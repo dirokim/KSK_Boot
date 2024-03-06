@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>${board} list</title>
+    <title>smile</title>
 
 	<c:import url="../temp/css.jsp"></c:import>
 
@@ -38,61 +38,36 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">${board}</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
 
-                    <!-- Content Row  Real Body  -->
-                    <div clas="row">
-                    <h1>Board List</h1>
-                        <table class="table table-hover"> 
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Title</th>
-                                    <th>Writer</th>
-                                    <th>Date</th>
-                                    <th>Hit</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${list}" var="vo">
-                                <tr>
-                                	<td>${vo.noticeNum}</td>
-                                	<td>${vo.noticeHead}</td>
-                                	<td>${vo.noticeWriter}</td>
-                                	<td>${vo.noticeDate}</td>
-                                	<td>${vo.noticeViews}</td>
-                                </tr>
-                                </c:forEach>
-
-                            </tbody>
-
-                        </table>
-                    </div>
-
+                    <!-- Content Row -->
                     <div class="row">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                            <c:if test="${!start}">
-                              <li class="page-item"><a class="page-link" href="./list?pager=${pager.lastNum-1}&kind=${kind}&search=${search}" aria-label="Previous"><span aria-hidden="true">&laquo;</span> </a></li>
-                            </c:if>
-                             
-                              <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-                              <li class="page-item"><a class="page-link" href="./list?pager=${i}&kind=${kind}&search=${search}">${i}</a></li>
-                              </c:forEach>
-                             
-                             <c:if test="${!last}">
-                              <li class="page-item"><a class="page-link" href="./list?pager=${pager.lastNum+1}&kind=${kind}&search=${search}" aria-label="Next"><span aria-hidden="true">&raquo;</span>
-                                </a></li>
-                              </c:if>
-                            </ul>
-                          </nav>
-                          <div class="pl-4">
-                            <a href="add" class="btn btn-primary">글쓰기</a>
+                        <form action="" method="post">
+                            
+                            <div class="mb-3">
+                                <label for="title" class="form-label">제목</label>
+                                <input type="text" class="form-control" id="title" name="noticeHead" placeholder="제목을 입력하세요">
+                            </div>
+                            <div class="mb-3">
+                                <label for="writer" class="form-label">작성자</label>
+                                <input type="text" class="form-control" id="writer" name="noticeWriter" placeholder="작성자를 입력하세요">
+                            </div>
+                            
 
-                          </div>
+                            <div class="mb-3">
+                                <label for="contents" class="form-label" >내용</label>
+                                <textarea class="form-control" id="contents" rows="3" name="noticeContents"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <button class="btn btn-primary">작성</button>
+                            </div>
+                        </form>
+
+
+
                     </div>
 
                 </div>
