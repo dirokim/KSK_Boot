@@ -7,7 +7,7 @@
   		SELECT * FROM NOTICE 
   		WHERE NOTICECONTENTS LIKE CONCAT('%','3','%')
   		ORDER BY NOTICENUM DESC
-  		LIMIT 0,10
+  		LIMIT 10,10
   	</select>
   
   	<insert id="add" parameterType="NoticeVO">
