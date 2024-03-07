@@ -49,7 +49,7 @@
                         <h3>${vo.noticeContents}</h3><br>
                         <div>
                             <c:forEach items="${vo.fileVOs}" var="file">
-                            <a href="/${board}/fileDown?fileNum=${file.fileNum}">${file.oriName}</a>
+                            <a href="/${board}/fileDown?fileNum="${file.fileNum}>${file.oriName}</a>
                             </c:forEach>
                         </div>
 
