@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.winter.app.board.BoardVO;
 import com.winter.app.util.Pager;
@@ -14,6 +15,7 @@ import com.winter.app.util.Pager;
 import lombok.extern.slf4j.Slf4j;
 @SpringBootTest
 @Slf4j
+@Transactional
 class NoticeDAOTest {
 	@Autowired
 	private NoticeDAO noticeDAO;

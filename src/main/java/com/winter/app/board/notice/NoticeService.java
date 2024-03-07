@@ -4,6 +4,7 @@ import java.util.List;import org.eclipse.tags.shaded.org.apache.xpath.operations
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -16,6 +17,7 @@ import com.winter.app.util.Pager;
 
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class NoticeService implements BoardService{
 	
 	@Autowired
