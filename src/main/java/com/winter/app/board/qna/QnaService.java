@@ -16,6 +16,8 @@ public class QnaService implements BoardService{
 	@Autowired
 	private QnaDAO qnaDAO;
 	
+	
+	
 	@Override
 	public List<BoardVO> getList(Pager pager) throws Exception {
 		return qnaDAO.getList(pager);
@@ -23,8 +25,9 @@ public class QnaService implements BoardService{
 
 	@Override
 	public int add(BoardVO boardVO, MultipartFile[] attach) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = qnaDAO.add(boardVO);	
+		result = qnaDAO.refUpdate(boardVO);
+		return result;
 	}
 
 	@Override

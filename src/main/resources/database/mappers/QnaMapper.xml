@@ -65,10 +65,14 @@
   	</select>
   
   	<insert id="add" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="noticeNum">
+  	
   		INSERT INTO QNA (NOTICENUM,NOTICEWRITER,NOTICEHEAD,NOTICECONTENTS,NOTICEDATE,NOTICEVIEWS)
-  		 VALUES(NULL,#{noticeWriter},#{noticeHead},#{noticeContents},now(),0)
+  		 VALUES(NULL,#{noticeWriter},#{noticeHead},#{noticeContents},now(),0,0,0,0)
   	</insert>
-  
+  	
+  	<update id="refUpdate" parameterType="BoardVO">
+  	UPDATE QNA SET NOTICEREF=#{NOTICENUM}WHERE NOTICENUM=#{NOTICENUM}
+  	</update>
 	  
   
   </mapper>
