@@ -6,18 +6,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.winter.app.board.BoardDAO;
+
 import com.winter.app.board.BoardService;
 import com.winter.app.board.BoardVO;
 import com.winter.app.board.FileVO;
 import com.winter.app.util.FileManager;
 import com.winter.app.util.Pager;
 
-import lombok.extern.java.Log;
-import lombok.extern.slf4j.Slf4j;
-@Slf4j
+
+
 @Service
 public class NoticeService implements BoardService{
+	
 	@Autowired
 	private NoticeDAO noticeDAO; 
 	@Value("${app.upload.board.notice}")
@@ -49,8 +49,16 @@ public class NoticeService implements BoardService{
 		}
 		return result;
 	}
+
 	@Override
 	public BoardVO getDetail(BoardVO boardVO) throws Exception {
+		// TODO Auto-generated method stub
 		return noticeDAO.getDetail(boardVO);
+	}
+
+	@Override
+	public FileVO getFileDetail(FileVO fileVO) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

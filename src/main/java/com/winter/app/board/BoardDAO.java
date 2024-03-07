@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.winter.app.util.Pager;
-@Mapper
+
 public interface BoardDAO {
 
 	public List<BoardVO> getList(Pager pager) throws Exception;
@@ -17,4 +17,6 @@ public interface BoardDAO {
 	public int addFile(FileVO fileVO) throws Exception;
 	
 	public BoardVO getDetail (BoardVO boardVO)throws Exception;
+	
+	public FileVO getFileDetail (FileVO fileVO);
 }

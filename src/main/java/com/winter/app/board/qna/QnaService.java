@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.winter.app.board.BoardService;
 import com.winter.app.board.BoardVO;
+import com.winter.app.board.FileVO;
 import com.winter.app.util.Pager;
 
 @Service
@@ -31,7 +32,11 @@ public class QnaService implements BoardService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	@Override
+	public FileVO getFileDetail(FileVO fileVO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }
