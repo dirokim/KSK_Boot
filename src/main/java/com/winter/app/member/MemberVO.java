@@ -16,6 +16,7 @@ public class MemberVO {
 	@NotBlank
 	private String password;
 	
+	private String passwordCheck;
 	private String phone;
 	@Email
 	private String email;

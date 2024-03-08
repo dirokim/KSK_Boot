@@ -25,12 +25,15 @@ public class MemberController {
 	}
 	
 	@PostMapping("add")
-	public String add (@Valid MemberVO memberVO,BindingResult bindingResult) throws Exception {
-
-		if(bindingResult.hasErrors()) {
-			return "member/add";
+	public String add (@Valid MemberVO memberVO,BindingResult bindingResult,Model model) throws Exception {
+		boolean check = memberService.checkMember(memberVO, bindingResult);
+			
+		if(check) {
+			return "member/add";	
 		}
-		
-		return "redirect:../";
+		int result = memberService.add(memberVO);
+		model.addAttribute("result","member.add.result");
+		model.addAttribute("path","/");
+		return "commons/result";
 	}
 }

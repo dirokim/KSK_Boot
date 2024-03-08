@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
+
+<!DOCTYPE html>
 <html lang="en">
-
-
 
 <head>
 
@@ -15,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>smile</title>
+    <title></title>
 
 	<c:import url="../temp/css.jsp"></c:import>
 
@@ -26,7 +25,9 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
+        <!-- Sidebar -->
 		<c:import url="../temp/sidebar.jsp"></c:import>
+        <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -34,7 +35,9 @@
             <!-- Main Content -->
             <div id="content">
 
-	    	<c:import url="../temp/topbar.jsp"></c:import>
+                <!-- Topbar -->
+				<c:import url="../temp/topbar.jsp"></c:import>
+                <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -47,29 +50,93 @@
                     </div>
 
                     <!-- Content Row -->
-                    <div clas="row">
-						<form:form modelAttribute="memberVO" method="post" >
-							<!-- ID -->
-							<form:input path="username"/>
-							<form:errors path="username"></form:errors><br>
-							<!-- Password -->
-							<form:password path="password"/>
-							<form:errors path="password"></form:errors><br>
-							<!-- Password Check -->
-							<form:password path="password"/><br>
-							<!-- phone -->
-							<form:input path="phone"/><br>
-							<!-- email -->
-							<form:input path="email"/><br>
-							<!-- 주소 -->
-							<form:input path="address"/><br>
-							<!-- 이름 -->
-							<form:input path="name"/><br>
-							<form:button>가입</form:button>
-						</form:form>
+                    <div class="row">
+
+						<div class="container">
 						
+						        <!-- Outer Row -->
+						        <div class="row justify-content-center">
 						
+						            <div class="col-xl-10 col-lg-12 col-md-9">
 						
+						                <div class="card o-hidden border-0 shadow-lg my-5">
+						                    <div class="card-body p-0">
+						                        <!-- Nested Row within Card Body -->
+						                        <div class="row">
+						                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+						                            <div class="col-lg-6">
+						                                <div class="p-5">
+						                                    <div class="text-center">
+						                                        <h1 class="h4 text-gray-900 mb-4">Member Join!</h1>
+						                                    </div>
+						                                    <form:form cssClass="user" modelAttribute="memberVO">
+						                                        <div class="form-group">
+						                                            <form:input path="username"  cssClass="form-control form-control-user"
+						                                                id="username"></form:input>
+						                                             <form:errors path="username"></form:errors>   
+						                                        </div>
+						                                        <div class="form-group">
+						                                            <form:password path="password" cssClass="form-control form-control-user"
+						                                                id="password" ></form:password>
+						                                            <form:errors path="password"></form:errors>    
+																	
+						                                        </div>
+						                                        <div class="form-group">
+						                                            <form:password path="passwordCheck" cssClass="form-control form-control-user"
+						                                                id="passwordCheck" ></form:password>
+						                                            <form:errors path="passwordCheck"></form:errors>
+																	
+						                                        </div>
+
+						                                        <div class="form-group">
+						                                            <form:input path="phone" cssClass="form-control form-control-user"
+						                                                id="phone" ></form:input>
+						                                            <form:errors path="phone"></form:errors>
+																	
+						                                        </div>
+																<div class="form-group">
+						                                            <form:input path="email" cssClass="form-control form-control-user"
+						                                                id="email" ></form:input>
+						                                            <form:errors path="email"></form:errors>    
+						                                        </div>
+																<div class="form-group">
+						                                            <form:input path="address" cssClass="form-control form-control-user"
+						                                                id="address" ></form:input>
+						                                            <form:errors path="address"></form:errors>
+																	
+						                                        </div>						
+																<div class="form-group">
+						                                            <form:input path="name" cssClass="form-control form-control-user"
+						                                                id="name" ></form:input>
+						                                            <form:errors path="name"></form:errors>    
+																	
+						                                        </div>										
+
+																<button class="btn btn-primary btn-user btn-block">Join</button>
+
+						                           
+						                                        <hr>
+						                                        <a href="index.html" class="btn btn-google btn-user btn-block">
+						                                            <i class="fab fa-google fa-fw"></i> Login with Google
+						                                        </a>
+						                                        <a href="index.html" class="btn btn-facebook btn-user btn-block">
+						                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+						                                        </a>
+						                                    </form:form>
+						                      
+						                                </div>
+						                            </div>
+						                        </div>
+						                    </div>
+						                </div>
+						
+						            </div>
+						
+						        </div>
+						
+						    </div>
+                    
+		
                     </div>
 
                 </div>
@@ -77,15 +144,18 @@
 
             </div>
             <!-- End of Main Content -->
-
+			
+            <!-- Footer -->
 			<c:import url="../temp/footer.jsp"></c:import>
+            <!-- End of Footer -->
+
         </div>
         <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
+    
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
@@ -104,7 +174,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="/login.html">Logout</a>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>
@@ -114,4 +184,4 @@
 
 </body>
 
-</html>
+</html> 
