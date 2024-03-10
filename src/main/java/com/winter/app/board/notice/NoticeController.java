@@ -39,7 +39,7 @@ public class NoticeController {
 		model.addAttribute("pager",pager);
 		return "board/list";
 	}
-	
+
 	@GetMapping("add")
 	public String add()throws Exception {
 		return "board/add";
@@ -57,7 +57,6 @@ public class NoticeController {
 		model.addAttribute("vo",boardVO);
 		return "board/detail";
 	}
-	
 	@GetMapping("fileDown")
 	public String fileDown (FileVO fileVO,Model model)throws Exception{
 		fileVO = noticeService.getFileDetail(fileVO);
