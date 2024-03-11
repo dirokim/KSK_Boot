@@ -13,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 	@Bean
 	WebSecurityCustomizer webSecurityCustomizer() {
-		return web -> web
+		return web -> web		//제외 설정
 				.ignoring()
 				.requestMatchers("/css/**")
 				.requestMatchers("/js/**")
@@ -23,14 +23,21 @@ public class SecurityConfig {
 	}
 	@Bean	
 	SecurityFilterChain filterChain (HttpSecurity security)throws Exception {
-		security.authorizeHttpRequests((authorizeRequests)->
-		authorizeRequests
+		security
+		//권한 설정
+		.authorizeHttpRequests((authorizeRequests)->authorizeRequests
 		.requestMatchers("/").permitAll()
 		.requestMatchers("/member/add").permitAll()
 		.requestMatchers("/notice/add","/notice/delete").hasRole("ADMIN")
 		.requestMatchers("/notice/update").hasAnyRole("ADMIN","MANAGER")
 		.anyRequest().permitAll()
-		);
+		)//authorizeHttpRequests  끝
+		.formLogin((login)->login
+		.loginPage("/member/login") //url 정보
+		.permitAll()
+				
+		);//formlogin 끝;
+		
 		return security.build();
 	}
 	

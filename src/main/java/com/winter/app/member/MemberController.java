@@ -24,12 +24,11 @@ import java.lang.reflect.Member;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
-
+	
+	
 	@GetMapping("login")
-	public String login (HttpSession session)throws Exception {
-		MemberVO memberVO = memberService.detail();
-		session.setAttribute("member",memberVO);
-		return"redirect:../";
+	public String login ()throws Exception {
+		return"member/login";
 	}
 	
 	@PostMapping("update")
