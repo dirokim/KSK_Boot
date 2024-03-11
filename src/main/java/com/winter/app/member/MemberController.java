@@ -26,8 +26,9 @@ public class MemberController {
 	private MemberService memberService;
 	
 	
+	
 	@GetMapping("login")
-	public String login ()throws Exception {
+	public String login (@ModelAttribute MemberVO memberVO)throws Exception {
 		return"member/login";
 	}
 	
@@ -38,7 +39,6 @@ public class MemberController {
 	
 	@GetMapping("update")
 	public void update (Model model,MemberVO memberVO)throws Exception {
-		memberVO = memberService.detail();
 		model.addAttribute("memberVO",memberVO);
 	}
 	

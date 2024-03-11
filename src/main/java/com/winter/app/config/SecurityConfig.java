@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -34,11 +36,18 @@ public class SecurityConfig {
 		)//authorizeHttpRequests  끝
 		.formLogin((login)->login
 		.loginPage("/member/login") //url 정보
+		.defaultSuccessUrl("/")      //로그인 성공하면 어디로가나
 		.permitAll()
-				
-		);//formlogin 끝;
 		
+		);//formlogin 끝;
 		return security.build();
+	}
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		//password 암호화 해주는 객체
+		
+		
+		return new BCryptPasswordEncoder();
 	}
 	
 }

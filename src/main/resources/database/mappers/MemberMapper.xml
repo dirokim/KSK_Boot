@@ -5,6 +5,11 @@
   <mapper namespace="com.winter.app.member.MemberDAO">
   	
   	
+  	<update id="update" parameterType="MemberVO">
+  	UPDATE MEMBER SET PASSWORD=#{password}
+  	WHERE username = #{username}
+  	</update>
+  	
   	<select id="getDetail" parameterType="MemberVO" resultType="MemberVO">
   	SELECT * FROM MEMBER
   	WHERE USERNAME=#{username}
