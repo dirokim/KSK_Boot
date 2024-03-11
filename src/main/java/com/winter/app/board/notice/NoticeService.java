@@ -17,7 +17,7 @@ import com.winter.app.util.Pager;
 
 
 @Service
-@Transactional(rollbackFor = Exception.class)
+//@Transactional(rollbackFor = Exception.class)
 public class NoticeService implements BoardService{
 	
 	@Autowired

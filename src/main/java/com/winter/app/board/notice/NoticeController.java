@@ -16,6 +16,7 @@ import com.winter.app.board.BoardVO;
 import com.winter.app.board.FileVO;
 import com.winter.app.util.Pager;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.java.Log;
 
 @Controller
@@ -40,14 +41,16 @@ public class NoticeController {
 		return "board/list";
 	}
 
-	@GetMapping("add")
+//	@GetMapping("add")
 	public String add()throws Exception {
 		return "board/add";
 	}
-	@PostMapping("add")
-	public String add(NoticeVO noticeVo,Model model,MultipartFile [] attach)throws Exception {
-		
-		int result = noticeService.add(noticeVo,attach);
+	
+	@GetMapping("add")
+	public String add(HttpSession session, NoticeVO noticeVo,Model model,MultipartFile [] attach)throws Exception {
+		if(session.getAttribute("member") !=null) {
+			int result = noticeService.add(noticeVo,attach);			
+		};
 		return "redirect:./list";
 	}
 	

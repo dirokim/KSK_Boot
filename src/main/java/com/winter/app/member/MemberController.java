@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.winter.app.member.groups.MemberJoinGroup;
 import com.winter.app.member.groups.MemberUpdateGroup;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,8 +25,13 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-
-
+	@GetMapping("login")
+	public String login (HttpSession session)throws Exception {
+		MemberVO memberVO = memberService.detail();
+		session.setAttribute("member",memberVO);
+		return"redirect:../";
+	}
+	
 	@PostMapping("update")
 	public void update (@Validated(MemberUpdateGroup.class)MemberVO memberVO)throws Exception {
 		
