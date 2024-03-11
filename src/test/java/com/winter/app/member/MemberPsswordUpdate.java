@@ -19,7 +19,7 @@ class MemberPsswordUpdate {
 	void test() throws Exception {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setUsername("winter"); 
-		memberVO.setPassword(passwordEncoder.encode("123456"));
+		memberVO.setPassword(passwordEncoder.encode("12345"));
 		int result = memberDAO.update(memberVO);
 		assertNotEquals(0, result);
 		

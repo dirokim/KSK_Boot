@@ -22,8 +22,6 @@ public class MemberService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setUsername(username);
-		log.info("================로그인 진행 =========");
-		log.info("================ {} =========",username);
 		try {
 			memberVO =  memberDAO.getDetail(memberVO);
 		} catch (Exception e) {

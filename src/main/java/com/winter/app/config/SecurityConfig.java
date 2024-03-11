@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.util.AntPathMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -30,6 +32,7 @@ public class SecurityConfig {
 		.authorizeHttpRequests((authorizeRequests)->authorizeRequests
 		.requestMatchers("/").permitAll()
 		.requestMatchers("/member/add").permitAll()
+		.requestMatchers("/notice/list").authenticated()
 		.requestMatchers("/notice/add","/notice/delete").hasRole("ADMIN")
 		.requestMatchers("/notice/update").hasAnyRole("ADMIN","MANAGER")
 		.anyRequest().permitAll()
@@ -39,14 +42,20 @@ public class SecurityConfig {
 		.defaultSuccessUrl("/")      //로그인 성공하면 어디로가나
 		.permitAll()
 		
-		);//formlogin 끝;
+		)//formlogin 끝;
+		.logout(
+				(logout)->logout
+				.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
+				.logoutSuccessUrl("/member/login")
+				.invalidateHttpSession(true)	//로그아웃시 세션만료
+				.permitAll()
+				);
+				
 		return security.build();
 	}
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		//password 암호화 해주는 객체
-		
-		
 		return new BCryptPasswordEncoder();
 	}
 	

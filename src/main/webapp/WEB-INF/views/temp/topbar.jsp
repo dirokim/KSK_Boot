@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
     <!-- Topbar -->
     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -48,7 +49,24 @@
                     </form>
                 </div>
             </li>
-
+		
+		<!-- 로그인 전 보이는 구간 시작 -->
+			<sec:authorize access="!isAuthenticated()">
+			<li class="nav-item mx-1">
+			<a href="/member/add" class="nav-link"><i class="fas fa-user-plus"></i></a>
+			</li>
+			<li class="nav-item mx-1">
+			<a href="/member/login" class="nav-link"><i class="fas fa-user"></i></a>
+			</li>
+			<li class="nav-item mx-1">
+			<a href="/member/logout" class="nav-link"><i class="fas fa-power-off"></i></a>
+			</li>
+			</sec:authorize>
+		
+		<!-- 로그인 전 보이는 구간 마지막 -->
+		<!-- 로그인 시작 -->
+		<sec:authorize access="isAuthenticated()">
+		
             <!-- Nav Item - Alerts -->
             <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
@@ -57,6 +75,7 @@
                     <!-- Counter - Alerts -->
                     <span class="badge badge-danger badge-counter">3+</span>
                 </a>
+                
                 <!-- Dropdown - Alerts -->
                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="alertsDropdown">
@@ -198,7 +217,8 @@
                     </a>
                 </div>
             </li>
-
+<!-- 로그인 성공시   -->
+			</sec:authorize>
         </ul>
 
     </nav>
