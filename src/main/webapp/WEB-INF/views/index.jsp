@@ -2,7 +2,10 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html lang="en">
+
+
 
 <head>
 
@@ -133,6 +136,11 @@
                     <!-- Content Row -->
 
                     <div class="row">
+
+                        <spring:message code="hello" text="환영"> </spring:message><br>
+                    <spring:message code="wellcome" text="환영"> </spring:message>
+                          
+
 
                         <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">

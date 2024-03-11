@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import com.winter.app.interceptor.TestInterceptor;
 
@@ -12,11 +13,10 @@ import ch.qos.logback.core.net.LoginAuthenticator;
 @Configuration
 public class InterceptorConfig implements  WebMvcConfigurer {
 	
+
 	@Autowired
-	private TestInterceptor testInterceptor; 
-	@Autowired
-	private LoginAuthenticator loginAuthenticator;
-	
+	private LocaleChangeInterceptor  localeChangeInterceptor;
+
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -27,10 +27,8 @@ public class InterceptorConfig implements  WebMvcConfigurer {
 //		.addPathPatterns("/")
 //		.excludePathPatterns("");
 //		
-//		
-		
-		
-		
+        registry.addInterceptor(localeChangeInterceptor)
+        .addPathPatterns("/**");
 		
 	}
 
