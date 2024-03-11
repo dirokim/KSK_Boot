@@ -22,7 +22,7 @@ class MemberPsswordUpdate {
 		memberVO.setPassword(passwordEncoder.encode("123456"));
 		int result = memberDAO.update(memberVO);
 		assertNotEquals(0, result);
-		passwordEncoder.
+		
 		
 		
 	}
