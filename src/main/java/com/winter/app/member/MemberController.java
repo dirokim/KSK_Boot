@@ -43,15 +43,27 @@ public class MemberController {
 		   SecurityContextImpl contectImpl = (SecurityContextImpl)obj;
 		   String name = contectImpl.getAuthentication().getName();
 		   MemberVO memberVO = (MemberVO)contectImpl.getAuthentication().getPrincipal();
+		   
+		   
 		   SecurityContext sc = SecurityContextHolder.getContext();
 		   sc.getAuthentication().getName();
 		   sc.getAuthentication().getPrincipal();
 	}
 	
 	@GetMapping("login")
-	public String login (@ModelAttribute MemberVO memberVO)throws Exception {
-		return"member/login";
+	public String login (@ModelAttribute MemberVO memberVO,HttpSession session)throws Exception {
+		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		if(obj==null) {
+			return "member/login";
+		}
+		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
+		String user =  contextImpl.getAuthentication().getPrincipal().toString();
+		if(user.equals("anonymousUser")) {
+			return "member/login";
+		}	
+		return"redirect:/";
 	}
+	
 	
 	@PostMapping("update")
 	public void update (@Validated(MemberUpdateGroup.class)MemberVO memberVO)throws Exception {

@@ -34,6 +34,10 @@ public class MemberVO implements UserDetails {
 	private String name;
 	private List<RoleVO> roleVOs;
 	
+	private boolean accountNonExpired;
+	private boolean accountNonLocked;
+	private boolean credentialsNonExpired;
+	private boolean enabled;
 	
 	
 	@Override
@@ -45,26 +49,7 @@ public class MemberVO implements UserDetails {
 		}
 		return authorities;
 	}
-	@Override
-	public boolean isAccountNonExpired() {
-		// 계정이 완료 됐냐 ?
-		return true;
-	}
-	@Override
-	public boolean isAccountNonLocked() {
-		// 계정이 잠기진 않았는지 ?
-		return true;
-	}
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// 비밀번호 의 유효기간
-		return true;
-	}
-	@Override
-	public boolean isEnabled() {
-		// 이 계정이 사용 가능한지
-		return true;
-	}
+
 	
 	
 	
