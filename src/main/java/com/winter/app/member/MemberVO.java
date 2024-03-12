@@ -1,8 +1,11 @@
 package com.winter.app.member;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.winter.app.member.groups.MemberJoinGroup;
@@ -29,13 +32,18 @@ public class MemberVO implements UserDetails {
 	private String email;
 	private String address;
 	private String name;
+	private List<RoleVO> roleVOs;
 	
 	
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		
-		return null;
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		for(RoleVO roleVOs:roleVOs) {
+			GrantedAuthority g = new SimpleGrantedAuthority(roleVOs.getRolename());
+			authorities.add(g);
+		}
+		return authorities;
 	}
 	@Override
 	public boolean isAccountNonExpired() {

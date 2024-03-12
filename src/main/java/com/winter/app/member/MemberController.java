@@ -1,6 +1,9 @@
 package com.winter.app.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +21,9 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Member;
+import java.util.Enumeration;
 
+@Slf4j
 @Controller
 @RequestMapping("/member/*")
 public class MemberController {
@@ -26,6 +31,22 @@ public class MemberController {
 	private MemberService memberService;
 	
 	
+	
+	@GetMapping("page")
+	public void page (HttpSession session) throws Exception {
+		//속성명이 무엇인가 ?   
+		Enumeration<String> en = session.getAttributeNames();
+		   while(en.hasMoreElements()) {
+			   en.nextElement();
+		   }
+		   Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		   SecurityContextImpl contectImpl = (SecurityContextImpl)obj;
+		   String name = contectImpl.getAuthentication().getName();
+		   MemberVO memberVO = (MemberVO)contectImpl.getAuthentication().getPrincipal();
+		   SecurityContext sc = SecurityContextHolder.getContext();
+		   sc.getAuthentication().getName();
+		   sc.getAuthentication().getPrincipal();
+	}
 	
 	@GetMapping("login")
 	public String login (@ModelAttribute MemberVO memberVO)throws Exception {

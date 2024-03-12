@@ -32,6 +32,7 @@ public class SecurityConfig {
 		.authorizeHttpRequests((authorizeRequests)->authorizeRequests
 		.requestMatchers("/").permitAll()
 		.requestMatchers("/member/add").permitAll()
+		.requestMatchers("/member/page").authenticated()
 		.requestMatchers("/notice/list").authenticated()
 		.requestMatchers("/notice/add","/notice/delete").hasRole("ADMIN")
 		.requestMatchers("/notice/update").hasAnyRole("ADMIN","MANAGER")

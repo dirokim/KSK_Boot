@@ -10,6 +10,8 @@
  	<typeAlias type="com.winter.app.board.FileVO" alias="FileVO"/>
  	<typeAlias type="com.winter.app.board.qna.QnaVO" alias="QnaVO"/>
  	<typeAlias type="com.winter.app.member.MemberVO" alias="MemberVO"/>
+ 	<typeAlias type="com.winter.app.member.RoleVO" alias="RoleVO"/>
+ 	
   	</typeAliases>
   </configuration>
   
