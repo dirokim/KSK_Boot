@@ -1,21 +1,32 @@
 package com.winter.app.member;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+
+import ch.qos.logback.core.net.server.Client;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
-public class MemberService implements UserDetailsService {
+public class MemberService extends DefaultOAuth2UserService implements UserDetailsService  {
 		
 	//add 검증 메서드
 	//비번일치 , id 중복 여부
@@ -24,6 +35,11 @@ public class MemberService implements UserDetailsService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	
+	
+	
+	
+	//UserDetailsService
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		MemberVO memberVO = new MemberVO();
@@ -63,4 +79,35 @@ public class MemberService implements UserDetailsService {
 		  }
 		return check;
 	}
+	
+	//DefaultOAuth2UserService
+	@Override
+	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+		log.info("kakao ===================={}",userRequest);
+		ClientRegistration c = userRequest.getClientRegistration();
+		log.info("================id:{}",c.getClientId()); 
+		log.info("================name:{}",c.getClientName());
+		OAuth2User user = super.loadUser(userRequest);
+		log.info("================name :{}",user.getName());
+		log.info("================user :{}",user.getAuthorities());
+		log.info("=====properties : {}",user.getAttribute("properties").toString());
+		if(c.getClientName().equalsIgnoreCase("Kakao")) {
+			user = this.kakao(user);
+		}
+		return user;
+	}
+	
+	private OAuth2User kakao(OAuth2User oAuth2User) {
+		Map<String,Object> map = oAuth2User.getAttribute("properties");
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername(oAuth2User.getName());
+		memberVO.setName(map.get("nickname").toString());
+		memberVO.setAttributes(oAuth2User.getAttributes());
+		List<RoleVO> lsit = new ArrayList<>();
+		RoleVO roleVO = new RoleVO();
+		roleVO.setRolename("ROLE_MEMBER");
+		memberVO.setRoleVOs(lsit);
+		return memberVO;
+	}
+	
 }

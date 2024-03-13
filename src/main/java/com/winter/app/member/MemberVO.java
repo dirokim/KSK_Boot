@@ -3,10 +3,12 @@ package com.winter.app.member;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import com.winter.app.member.groups.MemberJoinGroup;
 import com.winter.app.member.groups.MemberUpdateGroup;
@@ -21,7 +23,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class MemberVO implements UserDetails {
+public class MemberVO  implements UserDetails,OAuth2User {
 	@NotBlank(message = "꼭 입력하세요", groups= {MemberJoinGroup.class,MemberUpdateGroup.class})
 	private String username;
 	@NotBlank(groups = MemberJoinGroup.class)
@@ -33,6 +35,10 @@ public class MemberVO implements UserDetails {
 	private String address;
 	private String name;
 	private List<RoleVO> roleVOs;
+	
+	private String social;
+	
+	private Map<String,Object> attributes;
 	
 	private boolean accountNonExpired;
 	private boolean accountNonLocked;
@@ -49,6 +55,15 @@ public class MemberVO implements UserDetails {
 		}
 		return authorities;
 	}
+
+
+	@Override
+	public Map<String,Object> getAttribute(String name) {
+		// TODO Auto-generated method stub
+		return this.attributes;
+	}
+
+	
 
 	
 	

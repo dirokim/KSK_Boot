@@ -61,6 +61,10 @@
 			<li class="nav-item mx-1">
 			<a href="/member/logout" class="nav-link"><i class="fas fa-power-off"></i></a>
 			</li>
+
+            <li class="nav-item mx-1">
+                <a href="/oauth2/authorization/kakao" class="nav-link">KakaoLogin</a>
+                </li>
 			</sec:authorize>
 		
 		<!-- 로그인 전 보이는 구간 마지막 -->
