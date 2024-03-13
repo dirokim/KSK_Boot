@@ -70,12 +70,13 @@
 						                                        <h1 class="h4 text-gray-900 mb-4">Login!</h1>
 						                                        <div>
 						                                        <h3>${param.message}</h3>
+						                                      
 						                                        </div>
 						                                    </div>
 						                                    
 						                                    <form:form cssClass="user" modelAttribute="memberVO">
 						                                        <div class="form-group">
-						                                            <form:input path="username"  cssClass="form-control form-control-user"
+						                                            <form:input path="username" value="${cookie.rememberId.value}" cssClass="form-control form-control-user"
 						                                                id="username"></form:input>
 						                                             <form:errors path="username"></form:errors>   
 						                                        </div>
@@ -85,9 +86,17 @@
 						                                            <form:errors path="password"></form:errors>    
 																	
 						                                        </div>
-						                                 
-
-																								
+						                                 		
+						                                 		<div class="form-check"><br>
+ 																 <input class="form-check-input" name="rememberMe" type="checkbox" id="remember-me">
+ 																 <label class="form-check-label" for="remember-me"> remember-me</label>
+ 																 </div>
+ 																 <div>
+ 																 <input class="form-check-input" checked="checked" name="rememberId" type="checkbox"  id="rememberId">
+ 																 <label class="form-check-label" for="rememberId"> ID 기억하기 </label>
+																</div>
+											
+																										
 
 																<button class="btn btn-primary btn-user btn-block">Login</button>
 
