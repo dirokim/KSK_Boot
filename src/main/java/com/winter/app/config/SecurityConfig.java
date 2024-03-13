@@ -57,6 +57,7 @@ public class SecurityConfig {
 				.permitAll()
 		
 		)//formlogin 끝;
+		//로그아웃 
 		.logout((logout)->logout
 				.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
 				.logoutSuccessUrl("/")
@@ -64,6 +65,7 @@ public class SecurityConfig {
 				.invalidateHttpSession(true)	//로그아웃시 세션만료
 				.permitAll()
 				)
+		//rememberMe
 		.rememberMe((rememberMe)->
 				rememberMe.rememberMeParameter("rememberMe")
 				.tokenValiditySeconds(600)
@@ -72,6 +74,7 @@ public class SecurityConfig {
 				.authenticationSuccessHandler(handler)
 				.useSecureCookie(false)
 				)
+		//동시접속 처리
 		.sessionManagement((sessionManagement)->sessionManagement
 				.maximumSessions(1)  //최대 사용자
 				.maxSessionsPreventsLogin(false)
