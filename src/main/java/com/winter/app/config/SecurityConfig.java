@@ -23,6 +23,8 @@ public class SecurityConfig {
 	@Autowired
 	private SecurityLoginFailHandler failHandler;
 	@Autowired
+	private SecurityLogoutSucessHandler securityLogoutSucessHandler;
+	@Autowired
 	private MemberService memberService;
 	
 	@Bean
@@ -60,8 +62,8 @@ public class SecurityConfig {
 		//로그아웃 
 		.logout((logout)->logout
 				.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
-				.logoutSuccessUrl("/")
-//				.logoutSuccessHandler(null)
+//				.logoutSuccessUrl("/")
+				.logoutSuccessHandler(securityLogoutSucessHandler)
 				.invalidateHttpSession(true)	//로그아웃시 세션만료
 				.permitAll()
 				)

@@ -36,7 +36,7 @@ public class MemberVO  implements UserDetails,OAuth2User {
 	private String name;
 	private List<RoleVO> roleVOs;
 	
-	private String social;
+	private String social;  //NAVER KAKAO GOOGLE
 	
 	private Map<String,Object> attributes;
 	
