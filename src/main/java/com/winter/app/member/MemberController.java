@@ -79,15 +79,5 @@ public class MemberController {
 	public void add (@ModelAttribute MemberVO memberVO) throws Exception {
 	}
 	
-	@PostMapping("add")
-	public String add (@Validated(MemberJoinGroup.class) MemberVO memberVO,BindingResult bindingResult,Model model) throws Exception {
-		boolean check = memberService.checkMember(memberVO, bindingResult);
-		if(check) {
-			return "member/add";	
-		}
-		int result = memberService.add(memberVO);
-		model.addAttribute("result","member.add.result");
-		model.addAttribute("path","/");
-		return "commons/result";
-	}
+
 }
