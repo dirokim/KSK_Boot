@@ -46,6 +46,7 @@ public class SecurityLoginFailHandler implements AuthenticationFailureHandler{
 		}
 		if(exception instanceof DisabledException) {
 			message="휴면 계정입니다";
+			
 		}
 		message= URLEncoder.encode(message,"UTF-8");
 		response.sendRedirect("/member/login?message="+message);

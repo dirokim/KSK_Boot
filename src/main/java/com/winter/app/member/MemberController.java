@@ -31,7 +31,7 @@ public class MemberController {
 	private MemberService memberService;
 	
 	
-	 
+
 	@GetMapping("page")
 	public void page (HttpSession session) throws Exception {
 		//속성명이 무엇인가 ?   
